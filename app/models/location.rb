@@ -7,4 +7,8 @@ class Location < ApplicationRecord
   has_many :tags, through: :locations_tags
   has_many :visited_location, dependent: :destroy
   has_many :users, through: :visited_location
+
+  def visit_by(user, recommended = false)
+    user.visited_locations.create!(location_id: id, recommended: recommended)
+  end
 end

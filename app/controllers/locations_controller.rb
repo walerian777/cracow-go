@@ -67,6 +67,18 @@ class LocationsController < ApplicationController
     end
   end
 
+  def visit
+    respond_to do |format|
+      if @location.visit_by(current_user, params[:recommended])
+        format.html { redirect_to @location, notice: 'Location was visited.' }
+        format.json { render json: {}, status: :ok, location: @location }
+      else
+        format.html { render :edit }
+        format.json { render json: {}, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_location
