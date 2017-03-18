@@ -1,10 +1,16 @@
 class PathsController < ApplicationController
   before_action :set_path, only: [:show, :edit, :update, :destroy]
+  before_action :set_tag, only: [:generate_path]
 
   # GET /paths
   # GET /paths.json
   def index
     @paths = Path.all
+  end
+
+  def generate_path
+    coordinates = [params[:latitude], params[:longitude]]
+    @path = PathGenerator.call(current_user, @tag, coordinates)
   end
 
   # GET /paths/1
@@ -70,5 +76,9 @@ class PathsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def path_params
       params.require(:path).permit(:user_id, :tag_id)
+    end
+
+    def set_tag
+      @tag = Tag.find(params[:tag_id])
     end
 end

@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :omniauthable
   include DeviseTokenAuth::Concerns::User
-  has_many :paths
+  has_many :paths, dependent: :destroy
   has_many :visited_location, dependent: :destroy
   has_many :locations, through: :visited_location
 

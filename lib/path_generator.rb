@@ -20,8 +20,9 @@ class PathGenerator
     nodes = distances.sort_by!(&:values).flat_map(&:keys)
     path = Path.create(user: user, tag: tag)
 
-    nodes.each_with_index do |e,i| 
-      PathNode.create(location: e, path: path, possition: i)
+    nodes.each_with_index do |l,i| 
+      PathNode.create(location: l, path: path, possition: i)
     end
+    path
   end
 end
