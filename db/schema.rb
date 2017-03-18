@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318210042) do
+ActiveRecord::Schema.define(version: 20170318232615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20170318210042) do
     t.integer  "path_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "possition"
     t.index ["location_id"], name: "index_path_nodes_on_location_id", using: :btree
     t.index ["path_id"], name: "index_path_nodes_on_path_id", using: :btree
   end
