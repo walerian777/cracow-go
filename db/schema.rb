@@ -87,8 +87,21 @@ ActiveRecord::Schema.define(version: 20170318232615) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
+  create_table "visited_locations", force: :cascade do |t|
+    t.integer  "location_id"
+    t.integer  "user_id"
+    t.boolean  "recent",      default: true,  null: false
+    t.boolean  "recommended", default: false, null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.index ["location_id"], name: "index_visited_locations_on_location_id", using: :btree
+    t.index ["user_id"], name: "index_visited_locations_on_user_id", using: :btree
+  end
+
   add_foreign_key "path_nodes", "locations"
   add_foreign_key "path_nodes", "paths"
   add_foreign_key "paths", "tags"
   add_foreign_key "paths", "users"
+  add_foreign_key "visited_locations", "locations"
+  add_foreign_key "visited_locations", "users"
 end
