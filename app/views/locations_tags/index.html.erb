@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Locations Tags</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @locations_tags.each do |locations_tag| %>
+      <tr>
+        <td><%= link_to 'Show', locations_tag %></td>
+        <td><%= link_to 'Edit', edit_locations_tag_path(locations_tag) %></td>
+        <td><%= link_to 'Destroy', locations_tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Locations Tag', new_locations_tag_path %>
