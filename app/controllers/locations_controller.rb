@@ -12,6 +12,12 @@ class LocationsController < ApplicationController
   def show
   end
 
+  def near
+    coordinates = [params[:latitude], params[:longitude]]
+    distance = params[:distance] || 1
+    @locations = Location.within(distance, origin: coordinates)
+  end
+
   # GET /locations/new
   def new
     @location = Location.new

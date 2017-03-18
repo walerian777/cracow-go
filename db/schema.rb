@@ -18,8 +18,10 @@ ActiveRecord::Schema.define(version: 20170318195153) do
   create_table "locations", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.decimal  "latitude",    precision: 10, scale: 6
+    t.decimal  "longitude",   precision: 10, scale: 6
   end
 
   create_table "locations_tags", force: :cascade do |t|
