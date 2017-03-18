@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318181106) do
+ActiveRecord::Schema.define(version: 20170318195153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,24 @@ ActiveRecord::Schema.define(version: 20170318181106) do
     t.integer  "tag_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "path_nodes", force: :cascade do |t|
+    t.integer  "location_id"
+    t.integer  "path_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["location_id"], name: "index_path_nodes_on_location_id", using: :btree
+    t.index ["path_id"], name: "index_path_nodes_on_path_id", using: :btree
+  end
+
+  create_table "paths", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_paths_on_tag_id", using: :btree
+    t.index ["user_id"], name: "index_paths_on_user_id", using: :btree
   end
 
   create_table "tags", force: :cascade do |t|
@@ -64,4 +82,8 @@ ActiveRecord::Schema.define(version: 20170318181106) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
+  add_foreign_key "path_nodes", "locations"
+  add_foreign_key "path_nodes", "paths"
+  add_foreign_key "paths", "tags"
+  add_foreign_key "paths", "users"
 end
