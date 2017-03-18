@@ -1,4 +1,4 @@
 class LocationsTag < ApplicationRecord
-  has_one :locations
-  has_one :tags
+  belongs_to :location
+  belongs_to :tag
 end
