@@ -4,4 +4,8 @@ class User < ActiveRecord::Base
           :recoverable, :rememberable, :trackable, :omniauthable
   include DeviseTokenAuth::Concerns::User
   has_many :paths
+
+  def age
+    Time.current.year - year_of_birth
+  end
 end

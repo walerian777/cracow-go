@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :users, only: :update
+  resources :users, only: [:show, :update]
   resources :paths
   resources :locations_tags
   resources :tags

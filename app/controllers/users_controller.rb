@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:update]
+  before_action :set_user, only: [:show, :update]
+
+  # GET /users/1
+  # GET /users/1.json
+  def show
+  end
 
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
@@ -7,7 +12,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render json: {}, status: :ok }
+        format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
