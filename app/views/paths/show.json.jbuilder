@@ -1,1 +1,1 @@
-json.partial! "paths/path", path: @path
+json.array! @path.locations, partial: 'locations/location', as: :location
