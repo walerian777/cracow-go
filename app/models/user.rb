@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
           :recoverable, :rememberable, :trackable, :omniauthable
   include DeviseTokenAuth::Concerns::User
   has_many :paths, dependent: :destroy
-  has_many :visited_location, dependent: :destroy
+  has_many :visited_locations, dependent: :destroy
   has_many :locations, through: :visited_location
 
   def age
