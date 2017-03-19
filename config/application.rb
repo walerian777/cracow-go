@@ -19,7 +19,7 @@ Bundler.require(*Rails.groups)
 module CracowGo
   class Application < Rails::Application
     # Custom directories with classes and modules you want to be autoloadable.
-    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths << "#{Rails.root}/lib"
     config.middleware.use Rack::Cors do
       allow do
         origins '*'
