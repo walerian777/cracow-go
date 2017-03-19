@@ -10,7 +10,7 @@ class PathsController < ApplicationController
 
   def generate_path
     coordinates = [params[:latitude], params[:longitude]]
-    @path = PathGenerator.call(current_user, @tag, coordinates)
+    @path = ::PathGenerator.call(current_user, @tag, coordinates)
     respond_to do |format|
       format.html { redirect_to @path, notice: 'Path was successfully created.' }
       format.json { render :show, status: :ok, location: @path }
