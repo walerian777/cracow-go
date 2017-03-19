@@ -11,6 +11,10 @@ class PathsController < ApplicationController
   def generate_path
     coordinates = [params[:latitude], params[:longitude]]
     @path = PathGenerator.call(current_user, @tag, coordinates)
+    respond_to do |format|
+      format.html { redirect_to @path, notice: 'Path was successfully created.' }
+      format.json { render :show, status: :ok, location: @path }
+    end
   end
 
   # GET /paths/1
@@ -68,17 +72,17 @@ class PathsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_path
-      @path = Path.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_path
+    @path = Path.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def path_params
-      params.require(:path).permit(:user_id, :tag_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def path_params
+    params.require(:path).permit(:user_id, :tag_id)
+  end
 
-    def set_tag
-      @tag = Tag.find(params[:tag_id])
-    end
+  def set_tag
+    @tag = Tag.find(params[:tag_id])
+  end
 end
